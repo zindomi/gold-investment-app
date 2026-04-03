@@ -54,7 +54,7 @@ def get_cot():
 @st.cache_data(ttl=300)
 def get_macro():
     try:
-        dxy = yf.download("DX-Y.NYB", period="5d")["Close"].iloc[-1]
+        dxy = float(yf.download("DX-Y.NYB", period="5d")["Close"].iloc[-1])
     except:
         dxy = None
 
@@ -81,10 +81,10 @@ def compute_score(cot, trend, rsi, dxy, ry):
     elif rsi > 70:
         score -= 1
 
-    if dxy:
+    if dxy is not None and not pd.isna(dxy):
         score += -1 if dxy > 103 else 1
 
-    if ry:
+    if ry is not None and not pd.isna(ry):
         score += -1 if ry > 2 else 1
 
     return score
