@@ -219,9 +219,3 @@ else:
 df_all.to_csv(HISTORY_FILE,index=False)
 
 st.line_chart(df["Close"])
-
-streamlit
-yfinance
-pandas
-numpy
-requests
